@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GİRAY KAÇAR | Resmi Fırtına V4</title>
+    <title>GİRAY KAÇAR | Resmi Sayfa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -11,100 +11,141 @@
             --mavi: #1e3a8a;
             --neon-bordo: #ff1e1e;
             --neon-mavi: #00ffff;
-            --zemin: #010103;
+            --beyaz: #ffffff;
+            --kirmizi: #ff0000;
+            --zemin: #000000;
         }
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Poppins', sans-serif; background: var(--zemin); color: white; overflow-x: hidden; }
 
         /* ========================================= */
-        /* GİRİŞ EKRANI (DÜZELTİLDİ)                  */
+        /* ÖZEL NEONLU GİRİŞ EKRANI (LOADER)          */
         /* ========================================= */
         #loader {
             position: fixed; width: 100%; height: 100vh;
             background-color: var(--zemin);
             display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 9999;
-            transition: opacity 1s ease-out; text-align: center;
+            justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 1s ease-out;
+            text-align: center;
         }
 
-        .loader-logos { display: flex; gap: 25px; margin-bottom: 25px; animation: bounceIn 1s ease; }
-        .loader-logos img { height: 90px; width: auto; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
-        .turkish-flag { filter: drop-shadow(0 0 20px var(--neon-bordo)) !important; }
-        .ts-logo { filter: drop-shadow(0 0 20px var(--neon-mavi)) !important; }
-
-        .welcome-text { font-size: 3rem; font-weight: 900; letter-spacing: 5px; text-shadow: 0 0 25px var(--neon-mavi); margin: 0 0 10px 0; text-transform: uppercase; }
-        .loading-text { font-size: 1.1rem; color: var(--neon-mavi); letter-spacing: 6px; animation: pulse 1.5s infinite; text-transform: uppercase; margin: 0; }
-        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-        /* ========================================= */
-        /* ARKA PLAN VE ANA İÇERİK                    */
-        /* ========================================= */
-        .bg-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3;
-            background: linear-gradient(135deg, #050505 0%, #1a0000 50%, #00081a 100%);
-            background-size: 400% 400%; animation: fluidBG 15s ease infinite;
+        .flag-neon-container {
+            position: relative;
+            width: 200px; height: 140px;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 60px; border-radius: 15px; overflow: hidden;
         }
-        .texture-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM4MDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
-            opacity: 0.2;
+
+        .flag-neon-container::before {
+            content: ''; position: absolute; width: 300px; height: 300px;
+            background: conic-gradient(var(--kirmizi), var(--beyaz), var(--kirmizi), var(--beyaz));
+            animation: rotateNeon 3s linear infinite; z-index: 1;
         }
-        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
 
-        #content { display: none; opacity: 0; width: 90%; max-width: 450px; text-align: center; margin: 40px auto; transition: opacity 1s ease-in; }
+        .flag-neon-container::after {
+            content: ''; position: absolute; inset: 4px;
+            background: var(--zemin); border-radius: 12px; z-index: 2;
+        }
+
+        .turkish-flag {
+            width: 120px; height: auto; z-index: 3;
+            filter: drop-shadow(0 0 15px var(--kirmizi));
+        }
+
+        .text-neon-container {
+            position: relative;
+            padding: 25px 50px;
+            border-radius: 20px; overflow: hidden;
+            display: flex; flex-direction: column; gap: 5px;
+        }
+
+        .text-neon-container::before {
+            content: ''; position: absolute; inset: 0;
+            background: conic-gradient(var(--neon-bordo), var(--neon-mavi), var(--neon-bordo), var(--neon-mavi));
+            animation: rotateNeon 4s linear infinite reverse; z-index: 1;
+        }
+
+        .text-neon-container::after {
+            content: ''; position: absolute; inset: 4px;
+            background: var(--zemin); border-radius: 16px; z-index: 2;
+        }
+
+        .welcome-text { 
+            font-size: 2.5rem; font-weight: 900; letter-spacing: 4px; 
+            text-shadow: 0 0 15px var(--neon-mavi); position: relative; z-index: 3;
+            text-transform: uppercase; margin: 0;
+        }
+        .loading-text { 
+            font-size: 1rem; color: var(--neon-mavi); 
+            letter-spacing: 5px; animation: pulse 1.5s infinite;
+            position: relative; z-index: 3;
+            text-transform: uppercase; margin: 0;
+        }
+
+        @keyframes rotateNeon { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
         /* ========================================= */
-        /* YENİ NEONLU H1 (İSİM)                     */
+        /* ANA İÇERİK - NEON İSİM BÖLÜMÜ             */
         /* ========================================= */
-        h1 {
-            font-size: 2.8rem; font-weight: 900; margin-bottom: 40px;
-            text-transform: uppercase; letter-spacing: 2px;
-            /* Ana Renk: Bordo */
+        #content {
+            display: none; opacity: 0; width: 90%; max-width: 450px;
+            text-align: center; margin: 40px auto; transition: opacity 1s ease-in;
+        }
+
+        /* GİRAY KAÇAR NEON EFEKTİ */
+        h1 { 
+            font-size: 2.8rem; 
+            font-weight: 900; 
+            margin-bottom: 40px; 
+            text-transform: uppercase;
             color: #fff;
-            /* Neon Efektleri: Katmanlı text-shadow */
+            /* Neon Katmanları */
             text-shadow: 
-                0 0 5px #fff,
+                0 0 7px #fff,
                 0 0 10px #fff,
-                0 0 20px var(--neon-bordo),
-                0 0 30px var(--neon-bordo),
-                0 0 40px var(--neon-bordo),
-                2px 2px 0px var(--bordo), /* Derinlik */
-                -2px -2px 0px var(--mavi); /* Kontrast */
-            animation: flickeringN 2s infinite alternate; /* Titreme Efekti */
+                0 0 21px var(--neon-bordo),
+                0 0 42px var(--neon-bordo),
+                0 0 82px var(--neon-bordo),
+                0 0 92px var(--neon-bordo),
+                0 0 102px var(--neon-bordo);
+            /* Gerçekçi Neon Titreme Animasyonu */
+            animation: flicker 2s infinite alternate;
         }
 
-        /* Neon Titreme Animasyonu */
-        @keyframes flickeringN {
+        @keyframes flicker {
             0%, 18%, 22%, 25%, 53%, 57%, 100% {
                 text-shadow: 
-                    0 0 5px #fff,
-                    0 0 10px #fff,
-                    0 0 20px var(--neon-bordo),
-                    0 0 30px var(--neon-bordo),
+                    0 0 4px #fff,
+                    0 0 11px #fff,
+                    0 0 19px var(--neon-bordo),
                     0 0 40px var(--neon-bordo),
-                    2px 2px 0px var(--bordo),
-                    -2px -2px 0px var(--mavi);
+                    0 0 80px var(--neon-bordo),
+                    2px 2px 2px rgba(30, 58, 138, 1); /* Bordo-Mavi kontrastı için mavi gölge */
             }
-            20%, 24%, 55% { text-shadow: none; color: #333; } /* Sönme anı */
+            20%, 24%, 55% {        
+                text-shadow: none;
+                color: rgba(255, 255, 255, 0.3);
+            }
         }
 
-        /* ========================================= */
-        /* BUTONLAR (Neon Çerçeveli)                */
-        /* ========================================= */
         .btn {
-            position: relative; display: flex; align-items: center; color: white; text-decoration: none; margin-bottom: 25px;
-            padding: 22px; border-radius: 15px; font-weight: 700; background: rgba(10, 10, 10, 0.9); overflow: hidden; transition: 0.3s;
+            position: relative; display: flex; align-items: center;
+            color: white; text-decoration: none; margin-bottom: 25px;
+            padding: 22px; border-radius: 15px; font-weight: 700;
+            background: rgba(10, 10, 10, 0.9); overflow: hidden; transition: 0.3s;
             backdrop-filter: blur(5px);
         }
         .btn i { margin-right: 20px; font-size: 1.6rem; width: 40px; text-align: center; }
         .btn::before {
             content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 400%;
             background: conic-gradient(transparent, var(--bordo), var(--mavi), transparent 70%);
-            animation: rotate 3s linear infinite; z-index: -1;
+            animation: rotateNeon 3s linear infinite; z-index: -1;
         }
         .btn::after { content: ''; position: absolute; inset: 3px; background: #0f0f0f; border-radius: 12px; z-index: -1; }
-        @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(100, 149, 237, 0.4); }
+
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.3); }
 
         .kick-icon { color: #53fc18; }
         .insta-icon { color: #e1306c; }
@@ -115,33 +156,53 @@
 <body>
 
     <div id="loader">
-        <div class="loader-logos">
+        <div class="flag-neon-container">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="Türk Bayrağı" class="turkish-flag">
-            <img src="https://upload.wikimedia.org/wikipedia/tr/thumb/a/ab/Trabzonspor_logo.svg/1200px-Trabzonspor_logo.svg.png" alt="Trabzonspor Logosu" class="ts-logo">
         </div>
-        <div class="welcome-text">HOŞ GELDİNİZ</div>
-        <div class="loading-text">YÜKLENİYOR...</div>
-    </div>
 
-    <div class="bg-layer"></div>
-    <div class="texture-layer"></div>
-    <div id="particles-js"></div>
+        <div class="text-neon-container">
+            <div class="welcome-text">HOŞ GELDİNİZ</div>
+            <div class="loading-text">YÜKLENİYOR...</div>
+        </div>
+    </div>
 
     <div id="content">
         <h1>GİRAY KAÇAR</h1>
 
-        <a href="https://kick.com/remzigiraykacar" class="btn" target="_blank"><i class="fa-solid fa-bolt kick-icon"></i>  KİCK KANALIM</a>
-        <a href="https://www.instagram.com/giraykacarr?igsh=MXJoMGVhenJ4anB3NQ==" class="btn" target="_blank"><i class="fa-brands fa-instagram insta-icon"></i>  INSTAGRAM HESABIM</a>
-        <a href="https://www.instagram.com/remzigiraykacar?igsh=MWdhanBwdzJzemc0Mg==" class="btn" target="_blank"><i class="fa-brands fa-square-instagram insta-icon"></i>  YOUTUBE KANAL INSTAGRAM</a>
-        <a href="https://m.youtube.com/%40remzigiraykacar23" class="btn" target="_blank"><i class="fa-brands fa-youtube yt-icon"></i>  YOUTUBE KANALIM</a>
-        <a href="https://www.instagram.com/channel/AbbrjxNCkqs-cvzb/" class="btn" target="_blank"><i class="fa-solid fa-users bm-icon"></i>  INSTAGRAM TOPLULUK</a>
-        <a href="https://www.instagram.com/1bordo1mavii?igsh=YWF4enV0ZG01NXc0" class="btn" target="_blank"><i class="fa-solid fa-star-half-stroke bm-icon" style="color: #ff1e1e;"></i>  1BORDO1MAVİİ</a>
+        <a href="https://kick.com/remzigiraykacar" class="btn" target="_blank">
+            <i class="fa-solid fa-bolt kick-icon"></i>  KİCK KANALIM
+        </a>
+        <a href="https://www.instagram.com/giraykacarr?igsh=MXJoMGVhenJ4anB3NQ==" class="btn" target="_blank">
+            <i class="fa-brands fa-instagram insta-icon"></i>  INSTAGRAM HESABIM
+        </a>
+        <a href="https://www.instagram.com/remzigiraykacar?igsh=MWdhanBwdzJzemc0Mg==" class="btn" target="_blank">
+            <i class="fa-brands fa-square-instagram insta-icon"></i>  YOUTUBE KANAL INSTAGRAM
+        </a>
+        <a href="https://m.youtube.com/%40remzigiraykacar23" class="btn" target="_blank">
+            <i class="fa-brands fa-youtube yt-icon"></i>  YOUTUBE KANALIM
+        </a>
+        <a href="https://www.instagram.com/channel/AbbrjxNCkqs-cvzb/" class="btn" target="_blank">
+            <i class="fa-solid fa-users bm-icon"></i>  INSTAGRAM TOPLULUK
+        </a>
+        <a href="https://www.instagram.com/1bordo1mavii?igsh=YWF4enV0ZG01NXc0" class="btn" target="_blank">
+            <i class="fa-solid fa-star-half-stroke bm-icon" style="color: #ff1e1e;"></i>  1BORDO1MAVİİ
+        </a>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles-js", { "particles": { "number": { "value": 80 }, "color": { "value": ["#800000", "#6495ED"] }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true } }, "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } } } });
-        window.addEventListener("load", function() { setTimeout(() => { document.getElementById("loader").style.opacity = "0"; setTimeout(() => { document.getElementById("loader").style.display = "none"; document.getElementById("content").style.display = "block"; setTimeout(() => { document.getElementById("content").style.opacity = "1"; }, 50); }, 1000); }, 3000); });
+        window.addEventListener("load", function() {
+            setTimeout(() => {
+                const loader = document.getElementById("loader");
+                const content = document.getElementById("content");
+                
+                loader.style.opacity = "0";
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    content.style.display = "block";
+                    setTimeout(() => { content.style.opacity = "1"; }, 50);
+                }, 1000);
+            }, 3000); 
+        });
     </script>
 </body>
 </html>
