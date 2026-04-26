@@ -97,5 +97,77 @@
         .btn {
             position: relative; display: flex; align-items: center; color: white; text-decoration: none; margin-bottom: 25px;
             padding: 22px; border-radius: 15px; font-weight: 700; background: rgba(0, 0, 0, 0.85); overflow: hidden; transition: 0.3s;
-            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05
-                                                               
+            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05);
+        }
+        .btn::before {
+            content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 400%;
+            background: conic-gradient(transparent, var(--bordo), var(--mavi), transparent 70%);
+            animation: rotateNeon 3s linear infinite; z-index: -1;
+        }
+        .btn::after { content: ''; position: absolute; inset: 3px; background: #0f0f0f; border-radius: 12px; z-index: -1; }
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.3); }
+        .btn i { margin-right: 20px; font-size: 1.6rem; width: 40px; text-align: center; }
+        
+        .kick-icon { color: #53fc18; }
+        .insta-icon { color: #e1306c; }
+        .yt-icon { color: #ff0000; }
+        .bm-icon { color: var(--mavi); }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-overlay"></div>
+        
+        <div class="flag-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="Türk Bayrağı" class="turkish-flag">
+        </div>
+
+        <div class="text-container">
+            <div class="welcome-text">HOŞ GELDİNİZ</div>
+            <div class="loading-text">YÜKLENİYOR...</div>
+        </div>
+    </div>
+
+    <div class="bg-legend-wrapper">
+        <div class="legend-photo"></div>
+        <div class="legend-overlay"></div>
+    </div>
+    <div id="particles-js"></div>
+
+    <div id="content">
+        <h1>GİRAY KAÇAR</h1>
+        <a href="https://kick.com/remzigiraykacar" class="btn" target="_blank"><i class="fa-solid fa-bolt kick-icon"></i>  KİCK KANALIM</a>
+        <a href="https://www.instagram.com/giraykacarr?igsh=MXJoMGVhenJ4anB3NQ==" class="btn" target="_blank"><i class="fa-brands fa-instagram insta-icon"></i>  INSTAGRAM HESABIM</a>
+        <a href="https://www.instagram.com/remzigiraykacar?igsh=MWdhanBwdzJzemc0Mg==" class="btn" target="_blank"><i class="fa-brands fa-square-instagram insta-icon"></i>  YOUTUBE KANAL INSTAGRAM</a>
+        <a href="https://m.youtube.com/%40remzigiraykacar23" class="btn" target="_blank"><i class="fa-brands fa-youtube yt-icon"></i>  YOUTUBE KANALIM</a>
+        <a href="https://www.instagram.com/channel/AbbrjxNCkqs-cvzb/" class="btn" target="_blank"><i class="fa-solid fa-users bm-icon"></i>  INSTAGRAM TOPLULUK</a>
+        <a href="https://www.instagram.com/1bordo1mavii?igsh=YWF4enV0ZG01NXc0" class="btn" target="_blank"><i class="fa-solid fa-star-half-stroke bm-icon" style="color: #ff1e1e;"></i>  1BORDO1MAVİİ</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60 },
+                "color": { "value": ["#800000", "#00ffff"] },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 3 },
+                "move": { "enable": true, "speed": 1.5 }
+            }
+        });
+
+        window.addEventListener("load", function() {
+            setTimeout(() => {
+                document.getElementById("loader").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("loader").style.display = "none";
+                    document.getElementById("content").style.display = "block";
+                    setTimeout(() => { document.getElementById("content").style.opacity = "1"; }, 50);
+                }, 1000);
+            }, 3500); // Animasyonun tadını çıkarmak için süreyi biraz artırdım
+        });
+    </script>
+</body>
+</html>
