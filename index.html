@@ -1,153 +1,170 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giray Kaçar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GİRAY KAÇAR | Resmi Bağlantılar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bordo: #800000;
+            --mavi: #6495ED;
+            --neon-bordo: #ff0000;
+            --neon-mavi: #00ffff;
+            --karanlik: #050505;
+        }
 
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--karanlik); color: white; margin: 0; overflow: hidden; }
 
-body{
-font-family:Arial,sans-serif;
-color:white;
-text-align:center;
-min-height:100vh;
-background:linear-gradient(135deg,#7a0014,#001f5b);
-overflow-x:hidden;
-}
+        /* ========================================= */
+        /* TRABZONSPOR TEMALI GİRİŞ EKRANI (LOADER)  */
+        /* ========================================= */
+        #loader {
+            position: fixed; width: 100%; height: 100vh;
+            background: radial-gradient(circle, rgba(128,0,0,0.4) 0%, rgba(5,5,5,1) 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 0.8s ease-out;
+        }
 
-#intro{
-position:fixed; inset:0;
-background:linear-gradient(135deg,#7a0014,#001f5b);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:999;
-animation:fadeOut 2.5s ease forwards;
-animation-delay:2s;
-}
+        #loader .welcome-text {
+            font-size: 3.5rem; color: white; font-weight: 900; letter-spacing: 5px;
+            margin-bottom: 10px; text-transform: uppercase;
+            text-shadow: 0 0 20px var(--mavi);
+            animation: bounceIn 1s ease;
+        }
 
-#intro h1{font-size:30px;letter-spacing:3px;}
+        #loader .loading-text {
+            font-size: 1.2rem; color: var(--neon-mavi); letter-spacing: 8px;
+            animation: pulse-neon 1.5s infinite; text-transform: uppercase;
+        }
 
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
+        @keyframes pulse-neon {
+            0% { opacity: 0.4; text-shadow: 0 0 5px var(--mavi); }
+            50% { opacity: 1; text-shadow: 0 0 20px var(--neon-mavi); }
+            100% { opacity: 0.4; text-shadow: 0 0 5px var(--mavi); }
+        }
 
-.bg-logo{
-position:fixed;
-top:50%; left:50%;
-width:340px;
-opacity:0.07;
-transform:translate(-50%,-50%);
-animation:spin 25s linear infinite;
-z-index:-1;
-}
+        /* ========================================= */
+        /* ANA SAYFA VE NEON BUTONLAR                */
+        /* ========================================= */
+        #content {
+            display: none; opacity: 0;
+            width: 90%; max-width: 450px; text-align: center;
+            margin: 40px auto; transition: opacity 1s ease-in;
+        }
 
-@keyframes spin{
-from{transform:translate(-50%,-50%) rotate(0deg);}
-to{transform:translate(-50%,-50%) rotate(360deg);}
-}
+        .main-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #050505 0%, #1a0000 100%);
+            z-index: -1;
+        }
 
-.container{padding:50px 20px;animation:fadeIn 1.5s ease-in-out;}
+        h1 {
+            font-size: 2.8rem; color: white; font-weight: 900;
+            letter-spacing: 2px; margin-bottom: 40px; text-transform: uppercase;
+            text-shadow: 2px 2px 0px var(--bordo), -2px -2px 0px var(--mavi);
+        }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
-}
+        .btn {
+            position: relative;
+            display: flex; align-items: center; justify-content: flex-start;
+            color: white; text-decoration: none;
+            margin-bottom: 25px; padding: 22px; border-radius: 15px;
+            font-weight: 700; font-size: 1.1rem;
+            background: rgba(10, 10, 10, 0.9);
+            overflow: hidden; transition: 0.3s;
+        }
 
-.title{font-size:34px;margin-bottom:10px;letter-spacing:2px;}
+        .btn i { margin-right: 20px; font-size: 1.6rem; width: 40px; text-align: center; }
 
-.visitor{font-size:14px;margin-bottom:15px;opacity:0.8;}
+        /* Neon Dönen Işık Efekti */
+        .btn::before {
+            content: ''; position: absolute;
+            top: -150%; left: -50%; width: 200%; height: 400%;
+            background: conic-gradient(transparent, var(--bordo), var(--mavi), transparent 70%);
+            animation: rotate-neon 3s linear infinite;
+            z-index: -1;
+        }
 
-.live{
-display:inline-block;
-padding:8px 20px;
-background:rgba(255,0,0,0.85);
-border-radius:30px;
-font-weight:bold;
-margin-bottom:25px;
-animation:blink 1s infinite;
-}
+        .btn::after {
+            content: ''; position: absolute;
+            inset: 3px; background: #0f0f0f; 
+            border-radius: 12px; z-index: -1;
+        }
 
-@keyframes blink{50%{opacity:0.4;}}
+        @keyframes rotate-neon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-.link{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:12px;
-margin:14px auto;
-padding:16px;
-width:85%;
-max-width:420px;
-background:rgba(255,255,255,0.06);
-border-radius:16px;
-color:white;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-box-shadow:0 0 8px #7a0014,0 0 18px #001f5b;
-}
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(100, 149, 237, 0.5);
+        }
 
-.link:hover{
-transform:scale(1.08);
-box-shadow:0 0 12px #ff0033,0 0 25px #0033ff;
-}
+        /* İkon Renkleri */
+        .kick-icon { color: #53fc18; }
+        .insta-icon { color: #e1306c; }
+        .yt-icon { color: #ff0000; }
+        .bm-icon { color: var(--mavi); }
 
-.icon{width:28px;height:28px;}
-
-@media(max-width:600px){.title{font-size:26px;}}
-</style>
-
+    </style>
 </head>
-
 <body>
 
-<div id="intro">
-<h1>🔥 GİRAY KAÇAR 🔥</h1>
-<p>Yükleniyor...</p>
-</div>
+    <div id="loader">
+        <div class="welcome-text">HOŞ GELDİNİZ</div>
+        <div class="loading-text">YÜKLENİYOR...</div>
+    </div>
 
-<img src="https://upload.wikimedia.org/wikipedia/tr/thumb/5/5c/Trabzonspor.svg/512px-Trabzonspor.svg.png" class="bg-logo">
+    <div class="main-bg"></div>
 
-<div class="container">
+    <div id="content">
+        <h1>GİRAY KAÇAR</h1>
 
-<h1 class="title">Giray Kaçar</h1>
+        <a href="https://kick.com/remzigiraykacar" class="btn" target="_blank">
+            <i class="fa-solid fa-bolt kick-icon"></i> 1 KİCK KANALIM
+        </a>
+        
+        <a href="https://www.instagram.com/giraykacarr?igsh=MXJoMGVhenJ4anB3NQ==" class="btn" target="_blank">
+            <i class="fa-brands fa-instagram insta-icon"></i> 2 INSTAGRAM HESABIM
+        </a>
+        
+        <a href="https://www.instagram.com/remzigiraykacar?igsh=MWdhanBwdzJzemc0Mg==" class="btn" target="_blank">
+            <i class="fa-brands fa-square-instagram insta-icon"></i> 3 YOUTUBE KANAL INSTAGRAM
+        </a>
+        
+        <a href="https://m.youtube.com/%40remzigiraykacar23?fbclid=PAb21jcARaTnFleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAac2StlFZr8dTPU8Gk1fZqSabzbC8OCtffEKYHCTc2pPsk1EMARYJe87AjrAlw_aem_Z5l9kT59S94kHcpY2cdtig" class="btn" target="_blank">
+            <i class="fa-brands fa-youtube yt-icon"></i> 4 YOUTUBE KANALIM
+        </a>
+        
+        <a href="https://www.instagram.com/channel/AbbrjxNCkqs-cvzb/" class="btn" target="_blank">
+            <i class="fa-solid fa-users bm-icon"></i> 5 INSTAGRAM TOPLULUK
+        </a>
+        
+        <a href="https://www.instagram.com/1bordo1mavii?igsh=YWF4enV0ZG01NXc0" class="btn" target="_blank">
+            <i class="fa-solid fa-star-half-stroke bm-icon" style="color: #800000;"></i> 6 1BORDO1MAVİİ
+        </a>
 
-<div class="visitor">👀 Ziyaretçi: <span id="count">0</span></div>
+        <div style="height: 50px;"></div>
+    </div>
 
-<div class="live">🔴 CANLI YAYINDA</div>
+    <script>
+        window.addEventListener("load", function() {
+            const loader = document.getElementById("loader");
+            const content = document.getElementById("content");
 
-<a class="link" href="https://kick.com/remzigiraykacar">
-CANLI YAYIN (KICK)
-</a>
-
-<a class="link" href="https://www.instagram.com/giraykacarr">
-RESMİ INSTAGRAM
-</a>
-
-<a class="link" href="https://youtube.com/@remzigiraykacar23">
-YOUTUBE KANAL
-</a>
-
-<a class="link" href="https://www.instagram.com/channel/AbbrjxNCkqs-cvzb/">
-INSTAGRAM TOPLULUK
-</a>
-
-<a class="link" href="https://www.instagram.com/1bordo1mavii">
-1 BORDO 1 MAVİ
-</a>
-
-</div>
-
-<script>
-let count = localStorage.getItem("visitCount");
-if(!count){count=1;} else {count=parseInt(count)+1;}
-localStorage.setItem("visitCount",count);
-document.getElementById("count").innerText=count;
-</script>
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    content.style.display = "block";
+                    setTimeout(() => { content.style.opacity = "1"; }, 50);
+                    document.body.style.overflow = "auto";
+                }, 800);
+            }, 2500); 
+        });
+    </script>
 
 </body>
 </html>
