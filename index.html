@@ -19,7 +19,7 @@
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Poppins', sans-serif; background-color: #000; color: white; overflow-x: hidden; }
 
         /* ========================================= */
-        /* GİRİŞ EKRANI (KESİN ÇALIŞAN SÜRÜM)         */
+        /* GİRİŞ EKRANI (DÜZELTİLDİ)                  */
         /* ========================================= */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -27,79 +27,82 @@
             z-index: 9999; background: #000; text-align: center; transition: opacity 0.8s ease;
         }
 
-        /* Papara Park Arka Planı (Loader İçin) */
+        /* Papara Park Arka Planı */
         .loader-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://paparapark.com.tr/wp-content/uploads/2023/09/papara-park-stadyum-dis.jpg') center/cover no-repeat;
-            opacity: 0.3; z-index: -1;
+            background: url('https://img.fanatik.com.tr/img/75/1200x675/5dd929f9ae298b479c3d40a0.jpg') center/cover no-repeat;
+            opacity: 0.25; z-index: -1;
         }
 
-        /* Türk Bayrağı Neon Çerçeve */
+        /* Türk Bayrağı Kırmızı-Beyaz Neon */
         .flag-box {
-            position: relative; width: 160px; height: 110px;
+            position: relative; width: 165px; height: 115px;
             display: flex; justify-content: center; align-items: center;
-            margin-bottom: 40px; border-radius: 8px; overflow: hidden;
+            margin-bottom: 50px; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
         }
         .flag-box::before {
-            content: ''; position: absolute; width: 250px; height: 250px;
+            content: ''; position: absolute; width: 280px; height: 280px;
             background: conic-gradient(var(--kirmizi), var(--beyaz), var(--kirmizi), var(--beyaz));
             animation: rotate 3s linear infinite;
         }
-        .flag-box::after { content: ''; position: absolute; inset: 4px; background: #000; border-radius: 6px; }
-        .turkish-flag { width: 90px; z-index: 2; position: relative; filter: drop-shadow(0 0 10px red); }
+        .flag-box::after { content: ''; position: absolute; inset: 4px; background: #000; border-radius: 9px; }
+        .turkish-flag { width: 95px; z-index: 2; position: relative; filter: drop-shadow(0 0 10px red); }
 
-        /* Yazı Grubu ve Bordo-Mavi Neon */
+        /* Hoş Geldiniz Bordo-Mavi Neon */
         .welcome-box {
-            position: relative; padding: 20px 40px; border-radius: 15px; overflow: hidden;
+            position: relative; padding: 25px 45px; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
         }
         .welcome-box::before {
-            content: ''; position: absolute; inset: 0;
+            content: ''; position: absolute; inset: -50%;
             background: conic-gradient(var(--neon-bordo), var(--neon-mavi), var(--neon-bordo), var(--neon-mavi));
             animation: rotate 4s linear infinite reverse;
         }
-        .welcome-box::after { content: ''; position: absolute; inset: 3px; background: rgba(0,0,0,0.9); border-radius: 12px; }
+        .welcome-box::after { content: ''; position: absolute; inset: 4px; background: rgba(0,0,0,0.92); border-radius: 16px; }
         
-        .welcome-text { font-size: 2.2rem; font-weight: 900; letter-spacing: 3px; color: white; position: relative; z-index: 2; margin-bottom: 5px; }
-        .loading-text { font-size: 0.9rem; color: var(--neon-mavi); letter-spacing: 5px; position: relative; z-index: 2; animation: blink 1.5s infinite; }
+        .welcome-text { font-size: 2.2rem; font-weight: 900; letter-spacing: 4px; color: white; position: relative; z-index: 2; margin: 0; }
+        .loading-text { font-size: 1rem; color: var(--neon-mavi); letter-spacing: 6px; position: relative; z-index: 2; animation: blink 1.5s infinite; text-transform: uppercase; margin-top: 5px; }
 
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes blink { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
         /* ========================================= */
-        /* ANA İÇERİK VE ARKA PLAN                    */
+        /* ANA İÇERİK (PAPARA PARK %50)              */
         /* ========================================= */
-        #content { display: none; opacity: 0; width: 90%; max-width: 450px; margin: 40px auto; text-align: center; }
+        #content { display: none; opacity: 0; width: 92%; max-width: 450px; margin: 40px auto; text-align: center; }
         
         .main-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
-            background: url('https://pbs.twimg.com/media/F4Kz-WqX0AAZp8u.jpg:large') center/cover no-repeat;
-            opacity: 0.5; /* %50 Şeffaflık */
+            background: url('https://img.fanatik.com.tr/img/75/1200x675/5dd929f9ae298b479c3d40a0.jpg') center/cover no-repeat;
+            opacity: 0.5;
         }
         .main-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.95) 100%);
         }
 
-        h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 35px; text-shadow: 0 0 15px var(--neon-bordo); }
+        h1 { font-size: 2.6rem; font-weight: 900; margin-bottom: 40px; text-shadow: 0 0 20px var(--neon-bordo); letter-spacing: 2px; }
 
         .btn {
-            position: relative; display: flex; align-items: center; padding: 20px;
+            position: relative; display: flex; align-items: center; padding: 22px;
             background: rgba(0,0,0,0.85); color: white; text-decoration: none;
-            margin-bottom: 20px; border-radius: 12px; font-weight: 700;
-            overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+            margin-bottom: 22px; border-radius: 15px; font-weight: 700;
+            overflow: hidden; border: 1px solid rgba(255,255,255,0.08); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .btn::before {
             content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 400%;
             background: conic-gradient(transparent, var(--bordo), var(--mavi), transparent 70%);
             animation: rotate 3s linear infinite; z-index: -1;
         }
-        .btn::after { content: ''; position: absolute; inset: 2px; background: #0a0a0a; border-radius: 10px; z-index: -1; }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--neon-mavi); }
-        .btn i { width: 35px; margin-right: 15px; font-size: 1.4rem; }
+        .btn::after { content: ''; position: absolute; inset: 2px; background: #0a0a0a; border-radius: 13px; z-index: -1; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--neon-mavi); border-color: var(--neon-mavi); }
+        .btn i { width: 40px; margin-right: 15px; font-size: 1.6rem; text-align: center; }
 
         .kick-icon { color: #53fc18; }
         .insta-icon { color: #e1306c; }
         .yt-icon { color: #ff0000; }
+        .bm-icon { color: var(--neon-mavi); }
     </style>
 </head>
 <body>
@@ -120,12 +123,12 @@
 
     <div id="content">
         <h1>GİRAY KAÇAR</h1>
-        <a href="https://kick.com/remzigiraykacar" class="btn" target="_blank"><i class="fa-solid fa-bolt kick-icon"></i> KİCK KANALIM</a>
-        <a href="https://www.instagram.com/giraykacarr" class="btn" target="_blank"><i class="fa-brands fa-instagram insta-icon"></i> INSTAGRAM</a>
-        <a href="https://www.instagram.com/remzigiraykacar" class="btn" target="_blank"><i class="fa-brands fa-square-instagram insta-icon"></i> YOUTUBE INSTAGRAM</a>
-        <a href="https://m.youtube.com/%40remzigiraykacar23" class="btn" target="_blank"><i class="fa-brands fa-youtube yt-icon"></i> YOUTUBE KANALIM</a>
-        <a href="https://www.instagram.com/channel/AbbrjxNCkqs-cvzb/" class="btn" target="_blank"><i class="fa-solid fa-users" style="color: #00ffff;"></i> INSTAGRAM TOPLULUK</a>
-        <a href="https://www.instagram.com/1bordo1mavii" class="btn" target="_blank"><i class="fa-solid fa-star" style="color: #ff1e1e;"></i> 1BORDO1MAVİİ</a>
+        <a href="https://kick.com/remzigiraykacar" class="btn" target="_blank"><i class="fa-solid fa-bolt kick-icon"></i> 1 KİCK KANALIM</a>
+        <a href="https://www.instagram.com/giraykacarr" class="btn" target="_blank"><i class="fa-brands fa-instagram insta-icon"></i> 2 INSTAGRAM HESABIM</a>
+        <a href="https://www.instagram.com/remzigiraykacar" class="btn" target="_blank"><i class="fa-brands fa-square-instagram insta-icon"></i> 3 YOUTUBE KANAL INSTAGRAM</a>
+        <a href="https://m.youtube.com/%40remzigiraykacar23" class="btn" target="_blank"><i class="fa-brands fa-youtube yt-icon"></i> 4 YOUTUBE KANALIM</a>
+        <a href="https://www.instagram.com/channel/AbbrjxNCkqs-cvzb/" class="btn" target="_blank"><i class="fa-solid fa-users bm-icon"></i> 5 INSTAGRAM TOPLULUK</a>
+        <a href="https://www.instagram.com/1bordo1mavii" class="btn" target="_blank"><i class="fa-solid fa-star" style="color: #ff1e1e;"></i> 6 1BORDO1MAVİİ</a>
     </div>
 
     <script>
@@ -135,13 +138,17 @@
                 var loader = document.getElementById('loader');
                 var content = document.getElementById('content');
                 
-                loader.style.opacity = '0';
-                setTimeout(function() {
-                    loader.style.display = 'none';
-                    content.style.display = 'block';
-                    setTimeout(function() { content.style.opacity = '1'; }, 50);
-                }, 800);
-            }, 3000); // 3 saniye animasyon süresi
+                if(loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(function() {
+                        loader.style.display = 'none';
+                        if(content) {
+                            content.style.display = 'block';
+                            setTimeout(function() { content.style.opacity = '1'; }, 100);
+                        }
+                    }, 800);
+                }
+            }, 3000); 
         };
     </script>
 </body>
